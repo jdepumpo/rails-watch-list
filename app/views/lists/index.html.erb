@@ -1,0 +1,29 @@
+<ul class="list-group my-3">
+<% @lists.each do |list| %>
+<li class="list-group-item position-relative">
+<strong><%= link_to list_path(list.id) do %><%= list.name %><% end %></strong>
+<%= link_to list_path(list.id), class: "position-absolute end-20px", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+<i class="fa-regular fa-trash-can"></i>
+<% end %>
+<br />
+</li>
+<% end %>
+</ul>
+
+<hr />
+
+<p>
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Create a new list
+  </a>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+
+<%= simple_form_for @list do |f| %>
+  <%= f.input :name %>
+  <%= f.submit %>
+<% end %>
+
+  </div>
+</div>
