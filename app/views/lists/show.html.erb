@@ -1,22 +1,19 @@
-<%= link_to "<< Back to lists", lists_path, class: "btn btn-small" %>
+<%= link_to "<< Back to lists", root_path, class: "btn btn-small" %>
 
 <ul class="list-group my-3">
-<h2 class="list-group-item"><%= @list.name %></h2>
-<% @movies.movies.each do |movie| %>
-<li class="list-group-item position-relative">
-<%= image_tag movie.poster_url, style: "max-width: 100px; padding-top: 5px;" %><br />
-<h4 class="mt-4 mb-0"><%= movie.title %></h4><br />
-<p><%= movie.overview %></p> <br />
-<%
-=begin%>
- <%= link_to list_bookmark(@list.bookmark), class: "position-absolute end-20px", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-<i class="fa-regular fa-trash-can"></i>
-<% end %>
-<%
-=end%>
-</li>
-<% end %>
-</ul>
+  <h2 class="list-group-item"><%= @list.name %></h2>
+  <% @list.bookmarks.each do |bookmark| %>
+    <li class="list-group-item position-relative">
+      <%= image_tag bookmark.movie.poster_url, style: "max-width: 100px; padding-top: 5px;" %><br />
+      <h4 class="mt-4 mb-0"><%= bookmark.movie.title %></h4><br />
+      <p><%= bookmark.movie.overview %></p> <br />
+      <p><%= bookmark.comment %></p> <br />
+      <%= link_to list_bookmark_path(bookmark.id), class: "position-absolute end-20px top-20px", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+        <i class="fa-regular fa-trash-can"></i>
+      <% end %>
+    </li>
+  <% end %>
+  </ul>
 
 <hr />
 
