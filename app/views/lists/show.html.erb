@@ -6,7 +6,7 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
       <% @list.bookmarks.each do |bookmark| %>
   <div class="col">
-    <div class="card" style="width: 20rem;">
+    <div class="card h-100" style="max-width: 20rem;">
         <%= image_tag bookmark.movie.poster_url, class: "card-img-top" %>
       <div class="card-body">
         <h5 class="card-title"><%= bookmark.movie.title %></h5>
@@ -25,21 +25,20 @@
         <% end %>
 </div>
 
-<hr />
-
-<p>
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Add to the list
+<ul class="list-group my-3">
+  <h2 class="list-group-item">
+      <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <strong>+</strong> Add a movie
   </a>
-</p>
+  </h2>
+</ul>
+
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
-
     <%= simple_form_for [@list, @bookmark] do |f| %>
     <%= f.association :movie %>
     <%= f.input :comment %>
     <%= f.submit %>
-
-<% end %>
+  <% end %>
   </div>
 </div>
