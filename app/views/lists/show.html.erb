@@ -36,9 +36,26 @@
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
     <%= simple_form_for [@list, @bookmark] do |f| %>
-    <%= f.association :movie %>
+      <div class="container parent">
+        <div class="row">
+        <p>Select a movie:</p>
+            <div class='col text-center'>
+    <% @movie.each_with_index do |movie, i| %>
+            <input type="radio" name="bookmark[movie_id]" id="img<%= i %>" class="d-none imgbgchk" value="<%= movie.id %>">
+              <label for="img<%= i %>">
+                <img src="<%= movie.poster_url %>" alt="<%= movie.title %>">
+                <div class="tick_container">
+                  <div class="tick">
+                    <i class="fa fa-check"></i>
+                  </div>
+                </div>
+              </label>
+      <% end %>
+            </div>
+          </div>
+        </div>
     <%= f.input :comment %>
-    <%= f.submit %>
+    <%= f.submit "Add movie to list" %>
   <% end %>
   </div>
 </div>
